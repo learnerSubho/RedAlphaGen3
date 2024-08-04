@@ -130,7 +130,7 @@
             </div>
             <div class="col">
                 <h3>Feedback</h3>
-                <form>
+                <form name = 'submit-to-google-sheet'>
                     <div class="id">
                         <i class="fa-regular fa-envelope"></i>
                         <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -165,7 +165,17 @@
             navLinks.classList.toggle('show');
         });
     </script>
+    <script>
+  const scriptURL = '<https://script.google.com/macros/s/AKfycbxIqbMiZUWG9UUftygWB4uieaWMN8LdtBktammyyfyF1aubA_I8H_C4nEaryvxLqRb7cA/exec>'
+  const form = document.forms['submit-to-google-sheet']
 
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
 </body>
 
 </html>
